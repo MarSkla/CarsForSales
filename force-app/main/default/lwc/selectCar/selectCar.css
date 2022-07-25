@@ -1,0 +1,20 @@
+.space {
+    height: auto;
+    display: inline;
+    margin: 10px;
+  }
+
+.divTitle{
+    margin-left: 15px;
+    font-weight: bold;
+    color: chocolate;
+}
+
+
+.ownerPanel{
+    border-style: solid;
+    background-color: aqua;
+    border-radius: 10px;
+    padding: auto;
+    min-height: 100px;
+}

@@ -1,0 +1,65 @@
+<template>
+    <lightning-card title="Car Selector">
+        <h2 class="divTitle">Chose your company:<br></h2>
+        <div class="slds-align_absolute-center" style="height:5rem">
+            <lightning-layout for:each={Owners} for:item="owner" key={owner.id} class="space">
+                <lightning-button
+                    data-id={owner.Id}
+                    variant="brand"
+                    label={owner.Name}
+                    onclick={askForShowrooms}>
+                </lightning-button>
+            </lightning-layout>
+        </div>
+        <div if:true={companySelected}>
+            <h3 class="divTitle">Chose your showroom:<br></h3>
+        </div>
+        <div if:true={companySelected} class="slds-align_absolute-center" style="height:5rem">
+        <!-- trzeba sformatować SHOWROOMS-->
+            <lightning-layout title="Select your showroom" for:each={chosenShowrooms} for:item="showroom" key={showroom.id} class="space">
+                <lightning-button
+                    data-id={showroom.Id}
+                    variant="brand"
+                    label={showroom.Name}
+                    onclick={askForCars}>
+                </lightning-button>
+            </lightning-layout>
+        </div>
+        <!-- trzeba sformatować CARS-->
+        <div if:true={showroomSelected}>
+            <h3 class="divTitle">Chose your car:<br></h3>
+        </div>
+        <div if:true={showroomSelected} class="slds-align_absolute-center" style="height:5rem">
+            <lightning-layout  title="Select your car" for:each={chosenCars} for:item="car" key={car.id} class="space">
+                <lightning-button 
+                    data-id={car.Id}
+                    variant="brand"
+                    label={car.Full_Name__c}
+                    onclick={askForCars}>
+                </lightning-button>
+                <!-- <c-car-details chosencar={car.Id}></c-car-details> -->
+            </lightning-layout>
+        </div>
+        <!-- <template for:each={Owners} for:item="owner">
+            <div class="space" key={owner.Id}   >
+                <lightning-button
+                    data-id={owner.Id}
+                    variant="brand"
+                    label={owner.Name}
+                    onclick={askForShowrooms}>
+                </lightning-button>
+
+            </div>                                                                    
+            <template if:true={companySelected} for:each={chosenShowrooms} for:item="showroom">
+                <div class="space" key={showroom.Id}   >
+                    <lightning-button
+                        data-id={showroom.Id}
+                        variant="brand"
+                        label={showroom.Name}
+                        onclick={askForShowrooms}>
+                    </lightning-button>                
+                </div>   
+            </template>
+        </template> -->
+    </lightning-card>
+</template>
