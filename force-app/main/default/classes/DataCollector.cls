@@ -34,7 +34,6 @@ public with sharing class DataCollector {
                     Type__c,
                     Price__c,
                     Status__c,
-                    // Physically_Located__c,
                     Power__c,
                     Fuel_Consumption_L__c,
                     Load_Capacity__c,
@@ -43,10 +42,4 @@ public with sharing class DataCollector {
                     WHERE Id =: car];
 
     }
-
-    // @AuraEnabled
-    // public static List<Car_Showrooms_Owner__c> getCompanyName(String chosenCompany){
-
-    //     return [SELECT Name FROM Car_Showrooms_Owner__c WHERE Id =: chosenCompany];
-    // }
 }
