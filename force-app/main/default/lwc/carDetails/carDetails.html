@@ -1,70 +1,30 @@
-<!-- <template>
-    <lightning-card if:true={askedForDetails} title="View Record">
-        <lightning-record-form record-id = {chosencar}
-            object-api-name = "Car__c"
-            mode= "view"
-            layout-type= "Full"
-            columns ="5"
-            >
-        </lightning-record-form>
-    </lightning-card>
-</template> -->
-
-
 <template>
-    <lightning-card title="Car Details">
-        <div class="slds-align_absolute-center" style="height:5rem">
-            <p>Temporary text - space to present car details</p>
-
-            <table>
-                <tr>
-                    <td>CAr Make: </td> <td>Car Model :</td>
-                </tr>
-            </table>
-        </div>
-    </lightning-card>
+    <lightning-card if:true={askedForDetails} title="Car Details">
+        <div >
+            <lightning-record-view-form
+                record-id={passed}
+                object-api-name="Car__c">
+                <div class="slds-grid slds-align_absolute-center slds-p-left_xx-large">
+                    <div class="slds-col slds-size_1-of-4">
+                        <lightning-output-field field-name="Car_Make__c"></lightning-output-field>
+                        <lightning-output-field field-name="Car_Model__c"></lightning-output-field>
+                        <lightning-output-field field-name="Type__c"></lightning-output-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-4">
+                        <lightning-output-field field-name="Power__c"></lightning-output-field>
+                        <lightning-output-field field-name="Fuel_Consumption_L__c"></lightning-output-field>
+                        <lightning-output-field field-name="Load_Capacity__c"></lightning-output-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-4">
+                        <lightning-output-field field-name="Serial_Number__c"></lightning-output-field>
+                        <lightning-output-field field-name="Status__c"></lightning-output-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-4">
+                        <lightning-output-field field-name="Price__c"></lightning-output-field>
+                        <lightning-output-field field-name="Manager_Notes__c"></lightning-output-field>
+                    </div>
+                </div>
+                </lightning-record-view-form>
+            </div>
+            </lightning-card>
 </template>
-
-<!-- <template>
-    <lightning-card title="Car Details">
-        <table>
-            <tr>
-                <td>
-                    <div class="slds-m-around_medium">
-                        <select class="slds-select" onchange={contactFetch}>
-                            <option>Select Account</option>
-                            <template for:each ={acc} for:item="item">
-                                <option key={item.Id} value={item.Id}>{item.Name}</option>
-                            </template>
-                        </select>
-                     </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="slds-m-around_medium">
-                        <select class="slds-select" >
-                            <option >Select Contact</option>
-                            <template for:each ={con} for:item="item">
-                                <option key={item.Id} value={item.LastName}>{item.LastName}</option>
-                            </template>
-                        </select>
-                    </div>
-                </td>
-            </tr>
-    
-            <tr>
-                <td>
-                    <div class="slds-m-around_medium">
-                        <select class="slds-select" >
-                        <option >Select Opportunity</option>
-                            <template for:each ={opp} for:item="item">
-                                <option key={item.Id} value={item.Name}>{item.Name}</option>
-                            </template>
-                        </select>
-                    </div>
-                </td>
-            </tr>
-        </table>
-    </lightning-card>
-</template> -->

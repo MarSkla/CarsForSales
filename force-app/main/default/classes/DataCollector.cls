@@ -34,7 +34,7 @@ public with sharing class DataCollector {
                     Type__c,
                     Price__c,
                     Status__c,
-                    Physically_Located__c,
+                    // Physically_Located__c,
                     Power__c,
                     Fuel_Consumption_L__c,
                     Load_Capacity__c,

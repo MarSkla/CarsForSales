@@ -9,10 +9,13 @@ export default class SelectCar extends LightningElement {
     // @api title = "Select your company";
     @api companySelected = false
     @api showroomSelected = false
-    
+    @api receivedId = false;
+    @api chosenCarId;
+
     @track Owners;
     @track chosenShowrooms;
     @track chosenCars;
+    
     // @api recordId;
 
     constructor(){
@@ -26,6 +29,7 @@ export default class SelectCar extends LightningElement {
         // console.log('company event invoked')
         // this.title = "Select your showroom"
         this.companySelected = true
+        this.showroomSelected = false
         // console.log('companySelected = ', this.companySelected)
         let id = event.currentTarget.dataset.id
         // console.log('received id = ', id)
@@ -48,6 +52,13 @@ export default class SelectCar extends LightningElement {
         getCars({showroom: id })
         .then(result => {this.chosenCars = result})
         // console.log('ilośc salonów = ', this.chosenShowrooms.length)
+    }
+
+    passCarId(event){
+        console.log('passCarID works')
+        this.chosenCarId = event.currentTarget.dataset.id
+        console.log('chosenCarId: ', this.chosenCarId)
+        this.template.querySelector('c-car-details').askForCarDetails();
     }
 
     //dodać eventHandler przy kliklnięciu auta, żeby otrzyamć jego Id do przekazania do dziecka

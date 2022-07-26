@@ -35,13 +35,18 @@
                     data-id={car.Id}
                     variant="brand"
                     label={car.Full_Name__c}
-                    
+                    onclick={passCarId}
                     >
                     <!-- USUNĄŁEM onclick={askForCars} Z TYM AUTA ZNIKAŁY Z LC PO KLIKNIĘCIU-->
                 </lightning-button>
-                <!-- <c-car-details chosencar={car.Id}></c-car-details> TA NZAWA ZMIENNEJ WYWALAŁA BŁĘDY-->
+
+                
+                
             </lightning-layout>
         </div>
+        <c-car-details
+            passed={chosenCarId}>
+        </c-car-details>
         <!-- <template for:each={Owners} for:item="owner">
             <div class="space" key={owner.Id}   >
                 <lightning-button
