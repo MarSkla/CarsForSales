@@ -1,6 +1,6 @@
 <template>
     <lightning-card title="Car Selector">
-        <h2 class="divTitle">Chose your company:<br></h2>
+        <h2 class="divTitle">Select your company:<br></h2>
         <div class="slds-align_absolute-center" style="height:5rem">
             <lightning-layout for:each={Owners} for:item="owner" key={owner.id} class="space">
                 <lightning-button
@@ -12,7 +12,7 @@
             </lightning-layout>
         </div>
         <div if:true={companySelected}>
-            <h3 class="divTitle">Chose your showroom:<br></h3>
+            <h3 class="divTitle">Select your showroom:<br></h3>
         </div>
         <div if:true={companySelected} class="slds-align_absolute-center" style="height:5rem">
         <!-- trzeba sformatować SHOWROOMS-->
@@ -27,7 +27,7 @@
         </div>
         <!-- trzeba sformatować CARS-->
         <div if:true={showroomSelected}>
-            <h3 class="divTitle">Chose your car:<br></h3>
+            <h3 class="divTitle">Select your car:<br></h3>
         </div>
         <div if:true={showroomSelected} class="slds-align_absolute-center" style="height:5rem">
             <lightning-layout  title="Select your car" for:each={chosenCars} for:item="car" key={car.id} class="space">
@@ -35,9 +35,11 @@
                     data-id={car.Id}
                     variant="brand"
                     label={car.Full_Name__c}
-                    onclick={askForCars}>
+                    
+                    >
+                    <!-- USUNĄŁEM onclick={askForCars} Z TYM AUTA ZNIKAŁY Z LC PO KLIKNIĘCIU-->
                 </lightning-button>
-                <!-- <c-car-details chosencar={car.Id}></c-car-details> -->
+                <!-- <c-car-details chosencar={car.Id}></c-car-details> TA NZAWA ZMIENNEJ WYWALAŁA BŁĘDY-->
             </lightning-layout>
         </div>
         <!-- <template for:each={Owners} for:item="owner">

@@ -49,4 +49,6 @@ export default class SelectCar extends LightningElement {
         .then(result => {this.chosenCars = result})
         // console.log('ilośc salonów = ', this.chosenShowrooms.length)
     }
+
+    //dodać eventHandler przy kliklnięciu auta, żeby otrzyamć jego Id do przekazania do dziecka
 }
