@@ -20,7 +20,12 @@ export default class SelectCar extends LightningElement {
     constructor(){
         super();
         getOnwersRecords()
-        .then(result => {this.Owners = result})
+        .then(result => {
+            this.Owners = result
+        })
+        .catch(error => {
+            console.log('Constructor Error')
+        }) 
     }
 
     askForShowrooms(event){
@@ -29,18 +34,21 @@ export default class SelectCar extends LightningElement {
         getShowrooms({owner: id })
         .then(result => {
             if (result.length > 0) {
-                {this.chosenShowrooms = result}
-                {this.noCars = false}
                 {this.companySelected = true}
                 {this.showroomSelected = false}
                 {this.noShowrooms = false}
+                {this.noCars = false}
+                {this.chosenShowrooms = result}
             } else {
                 {this.companySelected = false}
                 {this.showroomSelected = false}
                 {this.noCars = false}
                 {this.noShowrooms = true}
             }
-        } )
+        })
+        .catch(error => {
+            console.log('Error - getShowrooms() for company Id = ' + id)
+        })
         
         this.template.querySelector('c-car-details').hideCArDetails();
     }
@@ -57,7 +65,10 @@ export default class SelectCar extends LightningElement {
             } else {
                 {this.showroomSelected = false}
                 {this.noCars = true}
-            }
+            };
+        })
+        .catch(error => {
+            console.log('Error - getCars() for showroom Id = ' + id)
         })
 
         this.template.querySelector('c-car-details').hideCArDetails();
