@@ -1,6 +1,6 @@
 public with sharing class DataCollector {
     
-    @AuraEnabled(cacheable=true)
+    @AuraEnabled
     public static List<Car_Showrooms_Owner__c> getOnwersRecords(){
         
         List<Car_Showrooms_Owner__c> ownerRecords = [SELECT Id, Name
@@ -10,7 +10,7 @@ public with sharing class DataCollector {
 
     }
 
-    @AuraEnabled(cacheable=true)
+    @AuraEnabled
     public static List<Showroom__c> getShowrooms(String owner) {
 
         return [SELECT id, Name FROM Showroom__c WHERE Showroom_Owner__c =: owner];
