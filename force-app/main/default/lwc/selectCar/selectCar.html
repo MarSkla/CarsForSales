@@ -34,6 +34,9 @@
                 </template>
             </lightning-layout>
         </div>
+        <div if:true={noShowrooms} >
+            <p class="slds-align_absolute-center noData">NO SHOWROOMS OWNED BY THIS COMPANY</p>
+        </div>
 
         <div if:true={showroomSelected}>
             <lightning-layout class="divTitle slds-var-p-left_small slds-var-p-right_small slds-var-p-top_medium">Select your car:</lightning-layout>
@@ -50,6 +53,9 @@
                     </lightning-layout-item>
                 </template>
             </lightning-layout>
+        </div>
+        <div if:true={noCars} >
+            <p class="slds-align_absolute-center noData">NO CARS ASSIGNED TO SELECTED SHOWROOM</p>
         </div>
 
         <c-car-details

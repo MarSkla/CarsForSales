@@ -7,6 +7,8 @@ export default class SelectCar extends LightningElement {
     @api companySelected = false
     @api showroomSelected = false
     @api receivedId = false;
+    @api noShowrooms = false;
+    @api noCars = false;
     
     @api chosenCarId;
 
@@ -22,22 +24,43 @@ export default class SelectCar extends LightningElement {
     }
 
     askForShowrooms(event){
-        this.companySelected = true
-        this.showroomSelected = false
         let id = event.currentTarget.dataset.id
-        this.template.querySelector('c-car-details').hideCArDetails();
-        
+
         getShowrooms({owner: id })
-        .then(result => {this.chosenShowrooms = result})
+        .then(result => {
+            if (result.length > 0) {
+                {this.chosenShowrooms = result}
+                {this.noCars = false}
+                {this.companySelected = true}
+                {this.showroomSelected = false}
+                {this.noShowrooms = false}
+            } else {
+                {this.companySelected = false}
+                {this.showroomSelected = false}
+                {this.noCars = false}
+                {this.noShowrooms = true}
+            }
+        } )
+        
+        this.template.querySelector('c-car-details').hideCArDetails();
     }
 
     askForCars(event){
-        this.showroomSelected = true
         let id = event.currentTarget.dataset.id
-        this.template.querySelector('c-car-details').hideCArDetails();
-        
+
         getCars({showroom: id })
-        .then(result => {this.chosenCars = result})
+        .then(result => {
+            if (result.length > 0) {
+                {this.chosenCars = result}
+                {this.noCars = false}
+                this.showroomSelected = true
+            } else {
+                {this.showroomSelected = false}
+                {this.noCars = true}
+            }
+        })
+
+        this.template.querySelector('c-car-details').hideCArDetails();
     }
 
     passCarId(event){

@@ -13,3 +13,10 @@
     white-space: nowrap;
     min-width: max-content;
 }
+
+.noData{
+    height: 5rem;
+    font:bold;
+    color:red;
+    font-size: large;
+}
