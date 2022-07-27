@@ -7,6 +7,7 @@ export default class SelectCar extends LightningElement {
     @api companySelected = false
     @api showroomSelected = false
     @api receivedId = false;
+    
     @api chosenCarId;
 
     @track Owners;
@@ -24,6 +25,7 @@ export default class SelectCar extends LightningElement {
         this.companySelected = true
         this.showroomSelected = false
         let id = event.currentTarget.dataset.id
+        this.template.querySelector('c-car-details').hideCArDetails();
         
         getShowrooms({owner: id })
         .then(result => {this.chosenShowrooms = result})
@@ -32,6 +34,7 @@ export default class SelectCar extends LightningElement {
     askForCars(event){
         this.showroomSelected = true
         let id = event.currentTarget.dataset.id
+        this.template.querySelector('c-car-details').hideCArDetails();
         
         getCars({showroom: id })
         .then(result => {this.chosenCars = result})
