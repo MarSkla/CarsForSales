@@ -1,6 +1,5 @@
 .space {
     height: auto;
-    display: inline;
     margin: 10px;
   }
 
@@ -10,10 +9,7 @@
     color: chocolate;
 }
 
-.ownerPanel{
-    border-style: solid;
-    background-color: aqua;
-    border-radius: 10px;
-    padding: auto;
-    min-height: 100px;
+.button{
+    white-space: nowrap;
+    min-width: max-content;
 }

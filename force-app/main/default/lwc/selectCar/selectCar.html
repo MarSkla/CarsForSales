@@ -1,43 +1,54 @@
 <template>
     <lightning-card title="Car Selector">
 
-        <h2 class="divTitle">Select your company:<br></h2>
-        <div class="slds-align_absolute-center" style="height:5rem">
-            <lightning-layout for:each={Owners} for:item="owner" key={owner.id} class="space">
-                <lightning-button
-                    data-id={owner.Id}
-                    variant="brand"
-                    label={owner.Name}
-                    onclick={askForShowrooms}>
-                </lightning-button>
+        <div class="slds-border_bottom">
+            <lightning-layout class="divTitle slds-var-p-left_small slds-var-p-right_small slds-var-p-top_medium">Select your company:</lightning-layout>
+            <lightning-layout class="slds-grid slds-wrap slds-var-p-around_large">
+                <template for:each={Owners} for:item="owner" >
+                    <lightning-layout-item key={owner.id} class="slds-align_absolute-center">
+                            <lightning-button
+                                class="button slds-small-size_1-of-2 slds-medium-size_1-of-2 slds-var-p-right_medium slds-var-p-bottom_medium"
+                                data-id={owner.Id}
+                                variant="brand"
+                                label={owner.Name}
+                                onclick={askForShowrooms}>
+                            </lightning-button>
+                    </lightning-layout-item>
+                </template>
             </lightning-layout>
         </div>
 
-        <div if:true={companySelected}>
-            <h3 class="divTitle">Select your showroom:<br></h3>
-        </div>
-        <div if:true={companySelected} class="slds-align_absolute-center" style="height:5rem">
-            <lightning-layout title="Select your showroom" for:each={chosenShowrooms} for:item="showroom" key={showroom.id} class="space">
-                <lightning-button
-                    data-id={showroom.Id}
-                    variant="brand"
-                    label={showroom.Name}
-                    onclick={askForCars}>
-                </lightning-button>
+        <div if:true={companySelected} class="slds-border_bottom">
+            <lightning-layout class="divTitle slds-var-p-left_small slds-var-p-right_small slds-var-p-top_medium">Select your showroom:</lightning-layout>
+            <lightning-layout class="slds-grid slds-wrap  slds-var-p-around_large">
+                <template for:each={chosenShowrooms} for:item="showroom">
+                    <lightning-layout-item key={showroom.id} class="slds-align_absolute-center">
+                            <lightning-button
+                                class="button slds-small-size_1-of-2 slds-medium-size_1-of-2 slds-var-p-right_medium slds-var-p-bottom_medium"
+                                data-id={showroom.Id}
+                                variant="brand"
+                                label={showroom.Name}
+                                onclick={askForCars}>
+                            </lightning-button>
+                    </lightning-layout-item>
+                </template>
             </lightning-layout>
         </div>
 
         <div if:true={showroomSelected}>
-            <h3 class="divTitle">Select your car:<br></h3>
-        </div>
-        <div if:true={showroomSelected} class="slds-align_absolute-center" style="height:5rem">
-            <lightning-layout  title="Select your car" for:each={chosenCars} for:item="car" key={car.id} class="space">
-                <lightning-button 
-                    data-id={car.Id}
-                    variant="brand"
-                    label={car.Full_Name__c}
-                    onclick={passCarId}>
-                </lightning-button> 
+            <lightning-layout class="divTitle slds-var-p-left_small slds-var-p-right_small slds-var-p-top_medium">Select your car:</lightning-layout>
+            <lightning-layout class="slds-grid slds-wrap  slds-var-p-around_large">
+                <template for:each={chosenCars} for:item="car">
+                    <lightning-layout-item key={car.id} class="slds-align_absolute-center">
+                            <lightning-button
+                                class="button slds-small-size_1-of-2 slds-medium-size_1-of-2 slds-var-p-right_medium slds-var-p-bottom_medium"
+                                data-id={car.Id}
+                                variant="brand"
+                                label={car.Full_Name__c}
+                                onclick={passCarId}>
+                            </lightning-button>
+                    </lightning-layout-item>
+                </template>
             </lightning-layout>
         </div>
 

@@ -41,9 +41,7 @@ export default class SelectCar extends LightningElement {
     }
 
     passCarId(event){
-        console.log('passCarID works')
         this.chosenCarId = event.currentTarget.dataset.id
-        console.log('chosenCarId: ', this.chosenCarId)
         this.template.querySelector('c-car-details').askForCarDetails();
     }
 }

@@ -1,30 +1,28 @@
 <template>
     <lightning-card if:true={askedForDetails} title="Car Details">
-        <div >
             <lightning-record-view-form
                 record-id={passed}
                 object-api-name="Car__c">
-                <div class="slds-grid slds-align_absolute-center slds-var-p-left_xx-large columns">
-                    <div class="slds-col slds-size_1-of-4 ">
+                <div class="slds-grid slds-wrap slds-var-p-horizontal_xx-large columns">
+                    <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-4 slds-border_bottom slds-var-p-around_small">
                         <lightning-output-field field-name="Car_Make__c"></lightning-output-field>
                         <lightning-output-field field-name="Car_Model__c"></lightning-output-field>
                         <lightning-output-field field-name="Type__c"></lightning-output-field>
                     </div>
-                    <div class="slds-col slds-size_1-of-4 ">
+                    <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-4 slds-border_bottom slds-var-p-around_small">
                         <lightning-output-field field-name="Power__c"></lightning-output-field>
                         <lightning-output-field field-name="Fuel_Consumption_L__c"></lightning-output-field>
                         <lightning-output-field field-name="Load_Capacity__c"></lightning-output-field>
                     </div>
-                    <div class="slds-col slds-size_1-of-4 ">
+                    <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-4 slds-border_bottom slds-var-p-around_small">
                         <lightning-output-field field-name="Serial_Number__c"></lightning-output-field>
                         <lightning-output-field field-name="Status__c"></lightning-output-field>
-                    </div>
-                    <div class="slds-col slds-size_1-of-4 ">
                         <lightning-output-field field-name="Price__c"></lightning-output-field>
+                    </div>
+                    <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-4 slds-var-p-around_small slds-scrollable_none">
                         <lightning-output-field field-name="Manager_Notes__c"></lightning-output-field>
                     </div>
                 </div>
-                </lightning-record-view-form>
-            </div>
-            </lightning-card>
+            </lightning-record-view-form>
+    </lightning-card>
 </template>
