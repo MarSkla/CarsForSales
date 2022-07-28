@@ -3,15 +3,27 @@ import getCarDetails from '@salesforce/apex/DataCollector.getCarDetails';
 
 export default class CarDetails extends LightningElement {
     @api askedForDetails = false;
-    @api passed;
+    @api recordId;
+    // @api passed;
 
-    @api
-    askForCarDetails(event){
-        this.askedForDetails = true
-    }
+    // _passed;
 
-    @api
-    hideCArDetails(){
-        this.askedForDetails = false
-    }
+    // @api
+    // get passed () {
+    //     return this._passed
+    // }
+
+    // set passed(value) {
+    //     this._passed = value
+    // }
+
+    // @api
+    // askForCarDetails(event){
+    //     this.askedForDetails = true
+    // }
+
+    // @api
+    // hideCArDetails(){
+    //     this.askedForDetails = false
+    // }
 }

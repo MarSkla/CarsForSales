@@ -6,6 +6,7 @@ import getCars from '@salesforce/apex/DataCollector.getCars';
 export default class SelectCar extends LightningElement {
     @api companySelected = false
     @api showroomSelected = false
+    @api askedForDetails = false
     @api receivedId = false;
     @api noShowrooms = false;
     @api noCars = false;
@@ -50,7 +51,8 @@ export default class SelectCar extends LightningElement {
             console.log('Error - getShowrooms() for company Id = ' + id)
         })
         
-        this.template.querySelector('c-car-details').hideCArDetails();
+        this.askedForDetails = false
+        // this.template.querySelector('c-car-details').hideCArDetails();
     }
 
     askForCars(event){
@@ -71,11 +73,14 @@ export default class SelectCar extends LightningElement {
             console.log('Error - getCars() for showroom Id = ' + id)
         })
 
-        this.template.querySelector('c-car-details').hideCArDetails();
+        // this.template.querySelector('c-car-details').hideCArDetails();
+        this.askedForDetails = false
     }
 
     passCarId(event){
         this.chosenCarId = event.currentTarget.dataset.id
-        this.template.querySelector('c-car-details').askForCarDetails();
+        // this.template.querySelector('c-car-details').askForCarDetails();
+        this.askedForDetails = true;
+
     }
 }

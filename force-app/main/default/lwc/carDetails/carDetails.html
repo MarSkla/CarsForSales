@@ -1,7 +1,7 @@
 <template>
-    <lightning-card if:true={askedForDetails} title="Car Details">
+    <lightning-card title="Car Details">
             <lightning-record-view-form
-                record-id={passed}
+                record-id={recordId}
                 object-api-name="Car__c">
                 <div class="slds-grid slds-wrap slds-var-p-horizontal_xx-large columns">
                     <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-4 slds-border_bottom slds-var-p-around_small">

@@ -58,8 +58,8 @@
             <p class="slds-align_absolute-center noData">NO CARS ASSIGNED TO SELECTED SHOWROOM</p>
         </div>
 
-        <c-car-details
-            passed={chosenCarId}>
+        <c-car-details if:true={askedForDetails}
+            record-id={chosenCarId}>
         </c-car-details>
         
     </lightning-card>
