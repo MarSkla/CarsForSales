@@ -4,6 +4,7 @@ import getShowrooms from '@salesforce/apex/DataCollector.getShowrooms';
 import getCars from '@salesforce/apex/DataCollector.getCars';
 
 export default class SelectCar extends LightningElement {
+    @api welcomeModalClosed = false
     @api companySelected = false
     @api showroomSelected = false
     @api askedForDetails = false
@@ -89,5 +90,9 @@ export default class SelectCar extends LightningElement {
         // this.template.querySelector('c-car-details').askForCarDetails();
         this.askedForDetails = true;
         this.isLoading = false;
+    }
+
+    closeWelcomeModal(event){
+        this.welcomeModalClosed = true;
     }
 }
