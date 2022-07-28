@@ -37,7 +37,8 @@ public with sharing class DataCollector {
                     Power__c,
                     Fuel_Consumption_L__c,
                     Load_Capacity__c,
-                    Manager_Notes__c
+                    Manager_Notes__c,
+                    interested__c
                     FROM Car__c
                     WHERE Id =: car];
 
