@@ -10,6 +10,7 @@ export default class SelectCar extends LightningElement {
     @api receivedId = false;
     @api noShowrooms = false;
     @api noCars = false;
+    @api isLoading = false;
     
     @api chosenCarId;
 
@@ -17,70 +18,76 @@ export default class SelectCar extends LightningElement {
     @track chosenShowrooms;
     @track chosenCars;
     
-
     constructor(){
         super();
+        this.isLoading = true;
         getOnwersRecords()
         .then(result => {
             this.Owners = result
         })
         .catch(error => {
             console.log('Constructor Error')
-        }) 
+        })
+        this.isLoading = false; 
     }
 
     askForShowrooms(event){
-        let id = event.currentTarget.dataset.id
+        this.isLoading = true;
+        let id = event.currentTarget.dataset.id;
 
         getShowrooms({owner: id })
         .then(result => {
             if (result.length > 0) {
-                {this.companySelected = true}
-                {this.showroomSelected = false}
-                {this.noShowrooms = false}
-                {this.noCars = false}
-                {this.chosenShowrooms = result}
+                {this.companySelected = true};
+                {this.showroomSelected = false};
+                {this.noShowrooms = false};
+                {this.noCars = false};
+                {this.chosenShowrooms = result};
             } else {
-                {this.companySelected = false}
-                {this.showroomSelected = false}
-                {this.noCars = false}
-                {this.noShowrooms = true}
+                {this.companySelected = false};
+                {this.showroomSelected = false};
+                {this.noCars = false};
+                {this.noShowrooms = true};
             }
         })
         .catch(error => {
-            console.log('Error - getShowrooms() for company Id = ' + id)
+            console.log('Error - getShowrooms() for company Id = ' + id);
         })
         
-        this.askedForDetails = false
+        this.askedForDetails = false;
         // this.template.querySelector('c-car-details').hideCArDetails();
+        this.isLoading = false;
     }
 
     askForCars(event){
-        let id = event.currentTarget.dataset.id
+        this.isLoading = true;
+        let id = event.currentTarget.dataset.id;
 
         getCars({showroom: id })
         .then(result => {
             if (result.length > 0) {
-                {this.chosenCars = result}
-                {this.noCars = false}
-                this.showroomSelected = true
+                {this.chosenCars = result};
+                {this.noCars = false};
+                this.showroomSelected = true;
             } else {
-                {this.showroomSelected = false}
-                {this.noCars = true}
+                {this.showroomSelected = false};
+                {this.noCars = true};
             };
         })
         .catch(error => {
-            console.log('Error - getCars() for showroom Id = ' + id)
+            console.log('Error - getCars() for showroom Id = ' + id);
         })
 
         // this.template.querySelector('c-car-details').hideCArDetails();
-        this.askedForDetails = false
+        this.askedForDetails = false;
+        this.isLoading = false;
     }
 
     passCarId(event){
-        this.chosenCarId = event.currentTarget.dataset.id
+        this.isLoading = true;
+        this.chosenCarId = event.currentTarget.dataset.id;
         // this.template.querySelector('c-car-details').askForCarDetails();
         this.askedForDetails = true;
-
+        this.isLoading = false;
     }
 }
