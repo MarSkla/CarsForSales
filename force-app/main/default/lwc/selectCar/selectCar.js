@@ -1,4 +1,5 @@
 import { LightningElement, track, api} from 'lwc';
+import carsForSale from '@salesforce/resourceUrl/carsForSale'
 import getOnwersRecords from '@salesforce/apex/DataCollector.getOnwersRecords';
 import getShowrooms from '@salesforce/apex/DataCollector.getShowrooms';
 import getCars from '@salesforce/apex/DataCollector.getCars';
@@ -18,6 +19,8 @@ export default class SelectCar extends LightningElement {
     @track Owners;
     @track chosenShowrooms;
     @track chosenCars;
+
+    carLogo = carsForSale;
     
     constructor(){
         super();
