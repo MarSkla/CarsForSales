@@ -1,6 +1,6 @@
 import { LightningElement, track, api} from 'lwc';
 import carsForSale from '@salesforce/resourceUrl/carsForSale'
-import getOnwersRecords from '@salesforce/apex/DataCollector.getOnwersRecords';
+import getOwnersRecords from '@salesforce/apex/DataCollector.getOwnersRecords';
 import getShowrooms from '@salesforce/apex/DataCollector.getShowrooms';
 import getCars from '@salesforce/apex/DataCollector.getCars';
 
@@ -25,7 +25,7 @@ export default class SelectCar extends LightningElement {
     constructor(){
         super();
         this.isLoading = true;
-        getOnwersRecords()
+        getOwnersRecords()
         .then(result => {
             this.Owners = result
         })
