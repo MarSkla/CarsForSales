@@ -26,7 +26,14 @@ public with sharing class DataCollector {
             }   
         }
 
-        return finalOwners;
+        if(finalOwners.Size() > 0) {
+            return finalOwners;  
+          } 
+          else {
+              return null;
+          }
+
+        // return finalOwners;
 
     }
 
