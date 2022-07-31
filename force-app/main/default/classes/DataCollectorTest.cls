@@ -122,52 +122,52 @@ public with sharing class DataCollectorTest {
     }
 
 
-    @isTest static void getCarDetailsTest() {
+    // @isTest static void getCarDetailsTest() {
 
-        Car_Showrooms_Owner__c testOwner = new Car_Showrooms_Owner__c(
-            Name = 'Owner Test'
-        );
+    //     Car_Showrooms_Owner__c testOwner = new Car_Showrooms_Owner__c(
+    //         Name = 'Owner Test'
+    //     );
 
-        insert testOwner;
+    //     insert testOwner;
 
-        Showroom__c testShowroom = new Showroom__c(
-            Name = 'Showroom Test',
-            Showroom_Owner__c = testOwner.Id,
-            Street__c = 'Showroom Test',
-            City__c = 'Showroom Test',
-            // Type__c = 'Passenger',
-            Internet_Site__c = 'www.google.com'
-        );
+    //     Showroom__c testShowroom = new Showroom__c(
+    //         Name = 'Showroom Test',
+    //         Showroom_Owner__c = testOwner.Id,
+    //         Street__c = 'Showroom Test',
+    //         City__c = 'Showroom Test',
+    //         // Type__c = 'Passenger',
+    //         Internet_Site__c = 'www.google.com'
+    //     );
 
-        insert testShowroom;
+    //     insert testShowroom;
         
-        Car__c testCar = new Car__c(
-            Car_Make__c = 'Car Test Maker',
-            Car_Model__c = 'Car Test Model',
-            Serial_Number__c = 'Car Test SN',
-            Type__c = 'Sport',
-            Price__c = 15000,
-            Status__c = 'Needs Repair',
-            Power__c = 100,
-            Fuel_Consumption_L__c = 12,
-            Load_Capacity__c = 1000,
-            Manager_Notes__c = '',
-            interested__c = false,
-            Physically_Located__c = testShowroom.id
-        );
+    //     Car__c testCar = new Car__c(
+    //         Car_Make__c = 'Car Test Maker',
+    //         Car_Model__c = 'Car Test Model',
+    //         Serial_Number__c = 'Car Test SN',
+    //         Type__c = 'Sport',
+    //         Price__c = 15000,
+    //         Status__c = 'Needs Repair',
+    //         Power__c = 100,
+    //         Fuel_Consumption_L__c = 12,
+    //         Load_Capacity__c = 1000,
+    //         Manager_Notes__c = '',
+    //         interested__c = false,
+    //         Physically_Located__c = testShowroom.id
+    //     );
 
-        insert testCar;
+    //     insert testCar;
 
-        Test.startTest();
-        Car__c testCarDetails = DataCollector.getCarDetails(testCar.id);
-        System.assertEquals(testCar.id, testCarDetails.id);
-    }
+    //     Test.startTest();
+    //     Car__c testCarDetails = DataCollector.getCarDetails(testCar.id);
+    //     System.assertEquals(testCar.id, testCarDetails.id);
+    // }
 
-    @isTest static void getCarDetailsWrongIdTest() {
+    // @isTest static void getCarDetailsWrongIdTest() {
 
-        Test.startTest();
-        Car__c testCarDetails = DataCollector.getCarDetails('blabla');
-        System.assertEquals(null, testCarDetails);
-    }
+    //     Test.startTest();
+    //     Car__c testCarDetails = DataCollector.getCarDetails('blabla');
+    //     System.assertEquals(null, testCarDetails);
+    // }
 
 }

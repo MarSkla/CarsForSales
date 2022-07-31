@@ -46,11 +46,15 @@ public with sharing class DataCollector {
     */
 
     @AuraEnabled
-    public static List<Showroom__c> getShowrooms(String owner) {
+    public static List<Showroom__c> getShowrooms(String outOwner) {
+
+        System.debug('called getShowrooms with owner: ' + outOwner);
 
         List<Showroom__c> showrooms = [SELECT Id, Name
                                        FROM Showroom__c
-                                       WHERE Showroom_Owner__c =: owner];
+                                       WHERE Showroom_Owner__c =: outOwner];
+
+        System.debug('showrooms size: ' + showrooms.size());
 
         List<Showroom__c> finalShowrooms = new List<Showroom__c>();
         List<Showroom__c> errorShowrooms = new List<Showroom__c>();
@@ -82,11 +86,11 @@ public with sharing class DataCollector {
     */
 
     @AuraEnabled
-    public static List<Car__c> getCars(String showroom){
+    public static List<Car__c> getCars(String outShowroom){
 
         List<Car__c> cars = [SELECT Full_Name__c
                              FROM Car__c
-                             WHERE Physically_Located__c =: showroom];
+                             WHERE Physically_Located__c =: outShowroom];
 
         List<Car__c> finalCars = new List<Car__c>();
         List<Car__c> errorCars = new List<Car__c>();
@@ -119,35 +123,36 @@ public with sharing class DataCollector {
                 Manager_Notes__c, interested__c
     */
 
-    @AuraEnabled
-    public static Car__c getCarDetails(String car){
+    // @AuraEnabled
+    // public static Car__c getCarDetails(String car){
 
-        if (car instanceof Id) {
-            return [SELECT Id,
-                        Car_Make__c,
-                        Car_Model__c,
-                        Serial_Number__c,
-                        Type__c,
-                        Price__c,
-                        Status__c,
-                        Power__c,
-                        Fuel_Consumption_L__c,
-                        Load_Capacity__c,
-                        Manager_Notes__c,
-                        interested__c
-                    FROM Car__c
-                    WHERE Id =: car
-                    Limit 1];
-        } else {
-            return null;
-        }
-    }
+    //     if (car instanceof Id) {
+    //         return [SELECT Id,
+    //                     Car_Make__c,
+    //                     Car_Model__c,
+    //                     Serial_Number__c,
+    //                     Type__c,
+    //                     Price__c,
+    //                     Status__c,
+    //                     Power__c,
+    //                     Fuel_Consumption_L__c,
+    //                     Load_Capacity__c,
+    //                     Manager_Notes__c,
+    //                     interested__c
+    //                 FROM Car__c
+    //                 WHERE Id =: car
+    //                 Limit 1];
+    //     } else {
+    //         return null;
+    //     }
+    // }
 
     /**
     * @date 29.07.2022
     * @Description Private method used to validate presence and type of Id for each record in a list of records
     *        returned by parent method.
-    * @param inputId Id value (string type) for selected car
+    * @param inputId field's api name contating Id value (string type) for an object
+    * @param objectType object's api name
     * @return a list of records related to selected showroom and stored in "Car__c" sObject
     * @return field included (api names): Id, Car_Make__c, Car_Model__c, Serial_Number__c, Type__c,
     *           Price__c, Status__c, Power__c, Fuel_Consumption_L__c, Load_Capacity__c,

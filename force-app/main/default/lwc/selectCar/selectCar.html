@@ -1,5 +1,7 @@
 <template>
 
+
+
     <section if:false={isWelcomeModalClosed} role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open slds-modal_small">
         <div class="slds-modal__container">
             <div class="slds-modal__header">
@@ -14,18 +16,20 @@
         </div>
     </section>
 
+
+    
     <lightning-card if:true={isWelcomeModalClosed} title="Car Selector">
         
-        <template if:true={isLoading}>
-            <div >
-                <lightning-spinner variant="brand"></lightning-spinner>
-            </div>
-        </template>
+
+        <!-- <div>
+            <lightning-spinner if:true={isLoading} variant="brand"></lightning-spinner>
+        </div> -->
 
         <div class="slds-border_bottom">
             <lightning-layout class="divTitle slds-var-p-left_small slds-var-p-right_small slds-var-p-top_medium">Select your company:</lightning-layout>
             <lightning-layout class="slds-grid slds-wrap slds-var-p-around_large">
-                <template if:false={isLoading} for:each={Owners} for:item="owner" >
+                <template for:each={Owners} for:item="owner" >
+                <!-- <template if:false={isLoading} for:each={Owners} for:item="owner" > -->
                     <lightning-layout-item key={owner.id} >
                             <lightning-button
                                 class="button slds-small-size_1-of-2 slds-medium-size_1-of-2 slds-var-p-right_medium slds-var-p-bottom_medium slds-float_left"
@@ -42,7 +46,8 @@
         <div if:true={isCompanySelected} class="slds-border_bottom">
             <lightning-layout class="divTitle slds-var-p-left_small slds-var-p-right_small slds-var-p-top_medium">Select your showroom:</lightning-layout>
             <lightning-layout class="slds-grid slds-wrap  slds-var-p-around_large">
-                <template if:false={isLoading} for:each={chosenShowrooms} for:item="showroom">
+                <template for:each={chosenShowrooms} for:item="showroom">
+                <!-- <template if:false={isLoading} for:each={chosenShowrooms} for:item="showroom"> -->
                     <lightning-layout-item key={showroom.id}>
                             <lightning-button
                                 class="button slds-small-size_1-of-2 slds-medium-size_1-of-2 slds-var-p-right_medium slds-var-p-bottom_medium slds-float_left"
@@ -55,14 +60,15 @@
                 </template>
             </lightning-layout>
         </div>
-        <div if:true={isNoShowrooms} >
+        <!-- <div if:true={isNoShowrooms} >
             <p class="slds-align_absolute-center noData">NO SHOWROOMS OWNED BY THIS COMPANY</p>
-        </div>
+        </div> -->
 
         <div if:true={isShowroomSelected}>
             <lightning-layout class="divTitle slds-var-p-left_small slds-var-p-right_small slds-var-p-top_medium">Select your car:</lightning-layout>
             <lightning-layout class="slds-grid slds-wrap  slds-var-p-around_large">
-                <template if:false={isLoading} for:each={chosenCars} for:item="car">
+                <template for:each={chosenCars} for:item="car">
+                <!-- <template if:false={isLoading} for:each={chosenCars} for:item="car"> -->
                     <lightning-layout-item key={car.id}>
                             <lightning-button
                                 class="button slds-small-size_1-of-2 slds-medium-size_1-of-2 slds-var-p-right_medium slds-var-p-bottom_medium slds-float_left"
@@ -75,10 +81,11 @@
                 </template>
             </lightning-layout>
         </div>
-        <div if:true={isNoCars} >
+        <!-- <div if:true={isNoCars} >
             <p class="slds-align_absolute-center noData">NO CARS ASSIGNED TO SELECTED SHOWROOM</p>
-        </div>
+        </div> -->
         
+        <!-- <div> -->
         <div if:false={isLoading}>
             <c-car-details if:true={isAskedForDetails}
                 record-id={chosenCarId}>
@@ -86,4 +93,14 @@
         </div>
 
     </lightning-card>
+
+    <template if:true={isLoading}>
+        <!-- <div if:true={isLoading} class="slds-is-relative"> -->
+        <div></div>
+            <lightning-spinner alternative-text="loading data..." variant="brand"></lightning-spinner>
+        </div>
+    </template>
+
 </template>
+
+
