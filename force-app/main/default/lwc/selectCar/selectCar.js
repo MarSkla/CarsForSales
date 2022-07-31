@@ -1,17 +1,18 @@
 import { LightningElement, track, api} from 'lwc';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import carsForSale from '@salesforce/resourceUrl/carsForSale'
 import getOwnersRecords from '@salesforce/apex/DataCollector.getOwnersRecords';
 import getShowrooms from '@salesforce/apex/DataCollector.getShowrooms';
 import getCars from '@salesforce/apex/DataCollector.getCars';
 
 export default class SelectCar extends LightningElement {
-    @api welcomeModalClosed = false
-    @api companySelected = false
-    @api showroomSelected = false
-    @api askedForDetails = false
-    @api receivedId = false;
-    @api noShowrooms = false;
-    @api noCars = false;
+    @api isWelcomeModalClosed = false
+    @api isCompanySelected = false
+    @api isShowroomSelected = false
+    @api isAskedForDetails = false
+    // @api receivedId = false;
+    @api isNoShowrooms = false;
+    @api isNoCars = false;
     @api isLoading = false;
     
     @api chosenCarId;
@@ -19,6 +20,8 @@ export default class SelectCar extends LightningElement {
     @track Owners;
     @track chosenShowrooms;
     @track chosenCars;
+
+    _toastMessage;
 
     carLogo = carsForSale;
     
@@ -39,26 +42,36 @@ export default class SelectCar extends LightningElement {
         this.isLoading = true;
         let id = event.currentTarget.dataset.id;
 
-        getShowrooms({owner: id })
+        getShowrooms({outOwner: id })
         .then(result => {
+
+            {this.isShowroomSelected = false};
+            {this.isNoCars = false};
+            
             if (result.length > 0) {
-                {this.companySelected = true};
-                {this.showroomSelected = false};
-                {this.noShowrooms = false};
-                {this.noCars = false};
+                {this.isCompanySelected = true};
+                // {this.isShowroomSelected = false};
+                {this.isNoShowrooms = false};
+                // {this.isNoCars = false};
                 {this.chosenShowrooms = result};
-            } else {
-                {this.companySelected = false};
-                {this.showroomSelected = false};
-                {this.noCars = false};
-                {this.noShowrooms = true};
             }
+            // else {
+            //     {this.isCompanySelected = false};
+            //     // {this.isShowroomSelected = false};
+            //     {this.isNoShowrooms = true};
+            //     // {this.isNoCars = false};
+            // }
         })
         .catch(error => {
-            console.log('Error - getShowrooms() for company Id = ' + id);
+            {this.isCompanySelected = false};
+            // {this.isNoShowrooms = true};
+            this._toastMessage = 'No showroms owned by selected company.'
+            this.showToast()
+
+            // console.error('Error - getShowrooms() for company Id = ' + id);
         })
         
-        this.askedForDetails = false;
+        this.isAskedForDetails = false;
         // this.template.querySelector('c-car-details').hideCArDetails();
         this.isLoading = false;
     }
@@ -67,23 +80,29 @@ export default class SelectCar extends LightningElement {
         this.isLoading = true;
         let id = event.currentTarget.dataset.id;
 
-        getCars({showroom: id })
+        getCars({outShowroom: id })
         .then(result => {
-            if (result.length > 0) {
+            if (result.length >= 1) {
+                {this.isNoCars = false};
+                this.isShowroomSelected = true;
                 {this.chosenCars = result};
-                {this.noCars = false};
-                this.showroomSelected = true;
-            } else {
-                {this.showroomSelected = false};
-                {this.noCars = true};
+            // } else {
+            //     {this.isShowroomSelected = false};
+            //     {this.isNoCars = true};
             };
         })
         .catch(error => {
-            console.log('Error - getCars() for showroom Id = ' + id);
+            {this.isShowroomSelected = false};
+            // {this.isNoCars = true};
+            this._toastMessage = 'No cars stored in selected showroom.'
+            this.showToast()
+
+
+            // console.log('Error - getCars() for showroom Id = ' + id);
         })
 
         // this.template.querySelector('c-car-details').hideCArDetails();
-        this.askedForDetails = false;
+        this.isAskedForDetails = false;
         this.isLoading = false;
     }
 
@@ -91,11 +110,21 @@ export default class SelectCar extends LightningElement {
         this.isLoading = true;
         this.chosenCarId = event.currentTarget.dataset.id;
         // this.template.querySelector('c-car-details').askForCarDetails();
-        this.askedForDetails = true;
+        this.isAskedForDetails = true;
         this.isLoading = false;
     }
 
     closeWelcomeModal(event){
-        this.welcomeModalClosed = true;
+        this.isWelcomeModalClosed = true;
+    }
+
+    showToast() {
+        const event = new ShowToastEvent({
+            title: 'Ekhm...',
+            message: this._toastMessage,
+            variant: 'error',
+            mode: 'sticky'
+        });
+        this.dispatchEvent(event);
     }
 }

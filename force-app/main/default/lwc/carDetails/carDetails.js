@@ -2,7 +2,7 @@ import { LightningElement, api, track } from 'lwc';
 import getCarDetails from '@salesforce/apex/DataCollector.getCarDetails';
 
 export default class CarDetails extends LightningElement {
-    @api askedForDetails = false;
+    @api isAskedForDetails = false;
     @api recordId;
     // @api passed;
 
@@ -19,11 +19,11 @@ export default class CarDetails extends LightningElement {
 
     // @api
     // askForCarDetails(event){
-    //     this.askedForDetails = true
+    //     this.isAskedForDetails = true
     // }
 
     // @api
     // hideCArDetails(){
-    //     this.askedForDetails = false
+    //     this.isAskedForDetails = false
     // }
 }
