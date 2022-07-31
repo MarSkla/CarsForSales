@@ -15,9 +15,9 @@ export default class SelectCar extends LightningElement {
     
     @api chosenCarId;
 
-    @track Owners;
-    @track chosenShowrooms;
-    @track chosenCars;
+    @api Owners;
+    @api chosenShowrooms;
+    @api chosenCars;
 
     _toastTitle;
     _toastMessage;
@@ -33,7 +33,9 @@ export default class SelectCar extends LightningElement {
             this.Owners = result
         })
         .catch(error => {
-            console.log('Constructor Error')
+            {this._toastTitle = 'Ups'};
+            {this._toastMessage = 'There are no data for this app'};
+            this.showToast();
         })
         this.isLoading = false; 
     }
@@ -42,33 +44,27 @@ export default class SelectCar extends LightningElement {
         
         this.isLoading = true;
         let id = event.currentTarget.dataset.id;
-        setTimeout(() =>         
+
+        // setTimeout(() =>         
             getShowrooms({outOwner: id })
             .then(result => {
-
                 {this.isShowroomSelected = false};
- 
+
                 if (result.length > 0) {
                     {this.isCompanySelected = true};
- 
                     {this.chosenShowrooms = result};
                     {this.isLoading = false};
-                    console.log('getShowrooms isLoading: ', this.isLoading);
+                    // console.log('getShowrooms isLoading: ', this.isLoading);
                 }
-               
             })
             .catch(error => {
-
                 {this.isCompanySelected = false};
-
                 {this._toastTitle = 'Company selection:'};
                 {this._toastMessage = 'No showroms owned by selected company.'};
                 this.showToast();
                 {this.isLoading = false};
-
-
             })
-        , 1000);
+        // , 1000);
 
         this.isAskedForDetails = false;
 
@@ -76,17 +72,17 @@ export default class SelectCar extends LightningElement {
 
     askForCars(event){
         this.isLoading = true;
-        console.log('askForCars isLoading changed: ', this.isLoading);
+        // console.log('askForCars isLoading changed: ', this.isLoading);
         let id = event.currentTarget.dataset.id;
         
-        setTimeout(()=>
+        // setTimeout(()=>
         getCars({outShowroom: id })
         .then(result => {
             if (result.length >= 1) {
                 {this.isShowroomSelected = true};
                 {this.chosenCars = result};
                 {this.isLoading = false};
-                console.log('askForCars isLoading: ', this.isLoading);
+                // console.log('askForCars isLoading: ', this.isLoading);
 
             };
         })
@@ -98,7 +94,7 @@ export default class SelectCar extends LightningElement {
             this.isLoading = false;
 
         })
-        , 1000);
+        // , 1000);
         this.isAskedForDetails = false;
     }
 
@@ -117,7 +113,7 @@ export default class SelectCar extends LightningElement {
         const event = new ShowToastEvent({
             title: this._toastTitle,
             message: this._toastMessage,
-            variant: 'error',
+            variant: 'warning',
         });
         this.dispatchEvent(event);
     }
