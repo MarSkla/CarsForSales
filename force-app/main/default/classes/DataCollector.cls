@@ -32,9 +32,6 @@ public with sharing class DataCollector {
           else {
               return null;
           }
-
-        // return finalOwners;
-
     }
 
     /**
@@ -74,7 +71,6 @@ public with sharing class DataCollector {
         else {
             return null;
         }
-        
     }
 
     /**
@@ -113,45 +109,12 @@ public with sharing class DataCollector {
 
     }
 
-    /**
-    * @date 29.07.2022
-    * @Description Method used to get list of all cars physically located in selected showroom
-    * @param car Id value (string type) for selected car
-    * @return a list of records related to selected showroom and stored in "Car__c" sObject
-    * @return field included (api names): Id, Car_Make__c, Car_Model__c, Serial_Number__c, Type__c,
-    *           Price__c, Status__c, Power__c, Fuel_Consumption_L__c, Load_Capacity__c,
-                Manager_Notes__c, interested__c
-    */
-
-    // @AuraEnabled
-    // public static Car__c getCarDetails(String car){
-
-    //     if (car instanceof Id) {
-    //         return [SELECT Id,
-    //                     Car_Make__c,
-    //                     Car_Model__c,
-    //                     Serial_Number__c,
-    //                     Type__c,
-    //                     Price__c,
-    //                     Status__c,
-    //                     Power__c,
-    //                     Fuel_Consumption_L__c,
-    //                     Load_Capacity__c,
-    //                     Manager_Notes__c,
-    //                     interested__c
-    //                 FROM Car__c
-    //                 WHERE Id =: car
-    //                 Limit 1];
-    //     } else {
-    //         return null;
-    //     }
-    // }
 
     /**
     * @date 29.07.2022
     * @Description Private method used to validate presence and type of Id for each record in a list of records
     *        returned by parent method.
-    * @param inputId field's api name contating Id value (string type) for an object
+    * @param inputId field's api name contating Id value for an object
     * @param objectType object's api name
     * @return a list of records related to selected showroom and stored in "Car__c" sObject
     * @return field included (api names): Id, Car_Make__c, Car_Model__c, Serial_Number__c, Type__c,
