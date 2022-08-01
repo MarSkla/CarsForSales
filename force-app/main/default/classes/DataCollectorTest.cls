@@ -42,13 +42,43 @@ public with sharing class DataCollectorTest {
             List<Showroom__c> testShowrooms = DataCollector.getShowrooms(testOwner.Id);
             System.assert(testShowrooms != null);
             System.assertEquals(testShowroom.Id, testShowrooms[0].Id);
-            System.debug('testOwner Id: ' + testOwner.Id);
-            System.debug('testShowroom Id: ' + testShowroom.Id);
-            System.debug('testOwner Name (List): ' + testShowrooms[0].Name);
-            System.debug('testOwner Id (List): ' + testShowrooms[0].Id);
+            // System.debug('testOwner Id: ' + testOwner.Id);
+            // System.debug('testShowroom Id: ' + testShowroom.Id);
+            // System.debug('testOwner Name (List): ' + testShowrooms[0].Name);
+            // System.debug('testOwner Id (List): ' + testShowrooms[0].Id);
             delete testShowroom;
             System.assertEquals(null, DataCollector.getShowrooms(testOwner.Id));
         Test.stopTest();    
+    }
+
+    // @isTest static void getShowroomsNullParameterTest() {
+    //     Id testId = null;
+    //     // System.debug('testId: ' + testId);
+    //     Boolean exceptionThrown = false;
+    //     // System.debug('exceptionThrown: ' + exceptionThrown);
+
+    //     try {
+    //         // System.debug('tried');
+    //         DataCollector.getShowrooms(testId);
+    //     } catch (NullPointerException e) {
+    //         // System.debug('catch');
+    //         // System.debug('exceptionThrown: ' + exceptionThrown);
+
+    //         exceptionThrown = true;
+    //         // System.debug('exceptionThrown: ' + exceptionThrown);
+
+    //     }
+        
+    //     // System.debug('after STOPTEST exceptionThrown: ' + exceptionThrown);
+    //     System.assert(exceptionThrown);
+        
+    // }
+
+    @isTest static void getShowroomsNullReturnTest() {
+
+        Test.startTest();
+            System.assertEquals(null, DataCollector.getShowrooms('1000000000zzzzz'));
+        Test.stopTest();
     }
 
     @isTest static void getCarsTest() {
