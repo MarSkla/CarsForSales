@@ -7,7 +7,6 @@ public with sharing class DataCollector {
     * @return fields included (api names): Id, Name
     */
 
-    
     @AuraEnabled
     public static List<Car_Showrooms_Owner__c> getOwnersRecords(){
         
@@ -45,30 +44,17 @@ public with sharing class DataCollector {
     @AuraEnabled
     public static List<Showroom__c> getShowrooms(String outOwner) {
 
-        System.debug('called getShowrooms with owner: ' + outOwner);
+        if(isAllowedIdType(outOwner, 'Car_Showrooms_Owner__c')) {
+            List<Showroom__c> showrooms = [SELECT Id, Name
+                                            FROM Showroom__c
+                                            WHERE Showroom_Owner__c =: outOwner];
 
-        List<Showroom__c> showrooms = [SELECT Id, Name
-                                       FROM Showroom__c
-                                       WHERE Showroom_Owner__c =: outOwner];
-
-        System.debug('showrooms size: ' + showrooms.size());
-
-        List<Showroom__c> finalShowrooms = new List<Showroom__c>();
-        List<Showroom__c> errorShowrooms = new List<Showroom__c>();
-
-        for (Showroom__c showroom : showrooms) {
-            if (isAllowedIdType(showroom.Id, 'Showroom__c')){
-                finalShowrooms.add(showroom);
+            if(showrooms.Size() > 0) {
+                return showrooms;  
+            } else {
+                return null;
             }
-            else {
-                errorShowrooms.add(showroom);
-            }   
-        }
-
-        if(finalShowrooms.Size() > 0) {
-          return finalShowrooms;  
-        } 
-        else {
+        } else {
             return null;
         }
     }
@@ -84,29 +70,19 @@ public with sharing class DataCollector {
     @AuraEnabled
     public static List<Car__c> getCars(String outShowroom){
 
-        List<Car__c> cars = [SELECT Full_Name__c
-                             FROM Car__c
-                             WHERE Physically_Located__c =: outShowroom];
+        if(isAllowedIdType(outShowroom, 'Showroom__c')) {
+            List<Car__c> cars = [SELECT Full_Name__c
+                                FROM Car__c
+                                WHERE Physically_Located__c =: outShowroom];
 
-        List<Car__c> finalCars = new List<Car__c>();
-        List<Car__c> errorCars = new List<Car__c>();
-
-        for (Car__c car : cars) {
-            if (isAllowedIdType(car.Id, 'Car__c')){
-                finalCars.add(car);
+            if(cars.Size() > 0) {
+                return cars;  
+            } else {
+                return null;
             }
-            else {
-                errorCars.add(car);
-            }   
-        }
-
-        if(finalCars.Size() > 0) {
-          return finalCars;  
-        } 
-        else {
+        } else {
             return null;
         }
-
     }
 
 
