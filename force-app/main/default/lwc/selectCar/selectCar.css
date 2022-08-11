@@ -1,0 +1,22 @@
+.space {
+    height: auto;
+    margin: 10px;
+  }
+
+.divTitle{
+    margin-left: 15px;
+    font-weight: bold;
+    color: chocolate;
+}
+
+.button{
+    white-space: nowrap;
+    min-width: max-content;
+}
+
+.noData{
+    height: 5rem;
+    font:bold;
+    color:red;
+    font-size: large;
+}

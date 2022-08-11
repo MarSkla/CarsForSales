@@ -1,0 +1,86 @@
+<template>
+
+    <section if:false={isWelcomeModalClosed} role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open slds-modal_small">
+        <div class="slds-modal__container">
+            <div class="slds-modal__header">
+                <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Are you ready...? :-)</h1>
+            </div>
+            <div class="slds-modal__content slds-var-p-around_medium" id="modal-content-id-1">
+                <img src={carLogo}>
+            </div>
+            <div class="slds-modal__footer">
+                <button class="slds-button slds-button_brand" onclick={closeWelcomeModal}>YESSS</button>
+            </div>
+        </div>
+    </section>
+    
+    <lightning-card if:true={isWelcomeModalClosed} title="Car Selector">
+
+        <div class="slds-border_bottom">
+            <lightning-layout class="divTitle slds-var-p-left_small slds-var-p-right_small slds-var-p-top_medium">Select your company:</lightning-layout>
+            <lightning-layout class="slds-grid slds-wrap slds-var-p-around_large">
+                <template for:each={Owners} for:item="owner" >
+                    <lightning-layout-item key={owner.id} >
+                            <lightning-button
+                                class="button slds-small-size_1-of-2 slds-medium-size_1-of-2 slds-var-p-right_medium slds-var-p-bottom_medium slds-float_left"
+                                data-id={owner.Id}
+                                variant="brand"
+                                label={owner.Name}
+                                onclick={askForShowrooms}>
+                            </lightning-button>
+                    </lightning-layout-item>
+                </template>
+            </lightning-layout>
+        </div>
+
+        <div if:true={isCompanySelected} class="slds-border_bottom">
+            <lightning-layout class="divTitle slds-var-p-left_small slds-var-p-right_small slds-var-p-top_medium">Select your showroom:</lightning-layout>
+            <lightning-layout class="slds-grid slds-wrap  slds-var-p-around_large">
+                <template for:each={chosenShowrooms} for:item="showroom">
+                    <lightning-layout-item key={showroom.id}>
+                            <lightning-button
+                                class="button slds-small-size_1-of-2 slds-medium-size_1-of-2 slds-var-p-right_medium slds-var-p-bottom_medium slds-float_left"
+                                data-id={showroom.Id}
+                                variant="brand"
+                                label={showroom.Name}
+                                onclick={askForCars}>
+                            </lightning-button>
+                    </lightning-layout-item>
+                </template>
+            </lightning-layout>
+        </div>
+
+        <div if:true={isShowroomSelected}>
+            <lightning-layout class="divTitle slds-var-p-left_small slds-var-p-right_small slds-var-p-top_medium">Select your car:</lightning-layout>
+            <lightning-layout class="slds-grid slds-wrap  slds-var-p-around_large">
+                <template for:each={chosenCars} for:item="car">
+                    <lightning-layout-item key={car.id}>
+                            <lightning-button
+                                class="button slds-small-size_1-of-2 slds-medium-size_1-of-2 slds-var-p-right_medium slds-var-p-bottom_medium slds-float_left"
+                                data-id={car.Id}
+                                variant="brand"
+                                label={car.Full_Name__c}
+                                onclick={passCarId}>
+                            </lightning-button>
+                    </lightning-layout-item>
+                </template>
+            </lightning-layout>
+        </div>
+
+        <div if:false={isLoading}>
+            <c-car-details if:true={isAskedForDetails}
+                record-id={chosenCarId}>
+            </c-car-details>
+        </div>
+
+    </lightning-card>
+
+    <template if:true={isLoading}>
+        <div>
+            <lightning-spinner alternative-text="loading data..." variant="brand"></lightning-spinner>
+        </div>
+    </template>
+
+</template>
+
+
